@@ -1,1 +1,1 @@
-prints all the values
+script that prints
