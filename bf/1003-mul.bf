@@ -1,18 +1,25 @@
-# BrainF*ck Script to multiply two numbers
-# Result has to be less than 10 (a single digit number)
-# given example 42: 4 will be in block #1 2 will be in block #2
-# block 0 will store the result
-# block 1 will hold the value to multiply
-# block 2 will hold the amount of times to multiply
-# the result of an input of 42 will output the result of 4*2
-# read into block 1 and 2
-# subtract 48 from each: '0'
-# loop while block 2 != 0 adding the value of block 1 to block 0 every time
-# BLOCK 0	BLOCK 1		BLOCK 2		BLOCK 3 	BLOCK4
-# 0		4		1		0 		
->,------------------------------------------------ # read into #1
->,------------------------------------------------ # read into #2
-[<[>>+<<<+>-]>>[<<+>>-] COPY BLOCK 1 INTO BLOCK 3 AND 0 THEN COPY BLOCK 3 BACK TO BLOCK 1
-<-] MOVE BLOCK TO BLOCK 2 AND DECREASE (DONE WITH ONE ITERATION)
-# MOVE TO BLOCK 0 AND INCREASE BY ASCII '0' (DEC 48)
-<<++++++++++++++++++++++++++++++++++++++++++++++++.
+,                       At c0 read char
+>++++++                 Forward to c1 and add 6             
+[<-------->-]           While c1 above 0 decrement c0 8 times and decrement c1 (this turns c0 from ASCII to int) 
+[-]                     Decrement c1 to 0 (ready for 2nd input)
+,                       At c1 read char
+>++++++                 Forward to c2 and add 6             
+[<-------->-]           While c2 above 0 decrement c1 8 times and decrement c2 (this turns c1 from ASCII to int)
+[-]                     Decrement c2 to 0 (ready for later calculation)
+<<[                     While c0 is not null
+    >[                  While c1 is not null
+        -               Decrement c1
+        >+              Forward to c2 and increment
+        >+              Forward to c3 and increment
+    <<]                 Back to c1 and loop
+    >[                  Forward to c2 and while c2 is not null
+        -               Decrement c2
+        <+              Back to c1 and increment c1 (this transfers c2 back to c1)
+    >]                  Back to c2 and loop
+    <<-                 Back to c1 and decrement c1
+]
+>[-]
+>+>[->+<<<<+>>>]>[<<[-]+>>>[-]++++++++++<[->-[>]<<]<[-<<-----
+----->>>>>>>+<<<<<]<[-<]>>>]>>>[-<<<<<<+>>>>>>]<<[-]<<<++++++
+[-<++++++++<++++++++>>]<.[-]<.[-]
+++++++++++.
